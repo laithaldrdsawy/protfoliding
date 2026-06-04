@@ -37,3 +37,32 @@
 
 </body>
 </html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture Element - Device Example</title>
+</head>
+<body>
+
+<h2>Responsive Picture Example</h2>
+
+<picture>
+    <source media="(min-width: 1000px)" srcset="https://picsum.photos/1000/400">
+
+    <source media="(min-width: 600px)" srcset="https://picsum.photos/600/300">
+
+    <img src="https://picsum.photos/300/200" alt="Responsive Image">
+</picture>
+
+<p>
+    This picture element changes the image depending on whether you are on desktop, tablet, or mobile.
+</p>
+
+</body>
+</html>
