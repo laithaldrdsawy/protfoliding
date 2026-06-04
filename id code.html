@@ -1,6 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Sidebar Navigation</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #333;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        h2 {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <a href="#C1">Chapter 1</a>
+    <a href="#C5">Chapter 5</a>
+    <a href="#C10">Chapter 10</a>
+    <a href="#C15">Chapter 15</a>
+    <a href="#C20">Chapter 20</a>
+</div>
+
+<div class="content">
+    <h2 id="C1">Chapter 1</h2>
+    <p>Content for Chapter 1...</p>
+
+    <h2 id="C5">Chapter 5</h2>
+    <p>Content for Chapter 5...</p>
+
+    <h2 id="C10">Chapter 10</h2>
+    <p>Content for Chapter 10...</p>
+
+    <h2 id="C15">Chapter 15</h2>
+    <p>Content for Chapter 15...</p>
+
+    <h2 id="C20">Chapter 20</h2>
+    <p>Content for Chapter 20...</p>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <title>Page Navigation</title>
 
     <style>
