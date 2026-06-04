@@ -1,6 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Table with Span Classes</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 12px;
+            text-align: center;
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+        .note {
+            color: green;
+            font-style: italic;
+        }
+        .title {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Using Table with Span Classes</h1>
+
+<table>
+    <tr>
+        <th class="title">Section</th>
+        <th>Content</th>
+    </tr>
+    <tr>
+        <td class="title">First Example</td>
+        <td>
+            Normal text with <span class="highlight">highlighted word</span>.
+        </td>
+    </tr>
+    <tr>
+        <td class="title">Second Example</td>
+        <td>
+            HTML is important for <span class="highlight">web development</span>.  
+            <br>
+            <span class="note">This is a note styled with class.</span>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <title>Div & Span with Class</title>
 
     <style>
