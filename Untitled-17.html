@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tables Example</title>
+
+    <style>
+
+        /* Table styling */
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* second table styling */
+        .t2 th {
+            background-color: #2196F3;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Table 1: Colspan & Rowspan</h2>
+
+<table>
+
+    <tr>
+        <th colspan="3">Student Information</th>
+    </tr>
+
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Grade</th>
+    </tr>
+
+    <tr>
+        <td rowspan="2">Ahmad</td>
+        <td>18</td>
+        <td>A</td>
+    </tr>
+
+    <tr>
+        <td>19</td>
+        <td>A+</td>
+    </tr>
+
+    <tr>
+        <td>Sara</td>
+        <td>20</td>
+        <td>B+</td>
+    </tr>
+
+</table>
+
+
+<h2 style="text-align:center;">Table 2: Colgroup + Styling</h2>
+
+<table class="t2">
+
+    <colgroup>
+        <col style="background-color:#f2f2f2;">
+        <col style="background-color:#e0f7fa;">
+        <col style="background-color:#fce4ec;">
+    </colgroup>
+
+    <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Score</th>
+    </tr>
+
+    <tr>
+        <td>Omar</td>
+        <td>Math</td>
+        <td>95</td>
+    </tr>
+
+    <tr>
+        <td>Lina</td>
+        <td>English</td>
+        <td>88</td>
+    </tr>
+
+</table>
+
+
+<h2 style="text-align:center;">Table 3: Size + Spacing Example</h2>
+
+<table style="width: 60%; border-spacing: 10px;">
+
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+    </tr>
+
+    <tr>
+        <td>Ali</td>
+        <td>Jordan</td>
+    </tr>
+
+    <tr>
+        <td>Mona</td>
+        <td>UAE</td>
+    </tr>
+
+</table>
+
+</body>
+</html>

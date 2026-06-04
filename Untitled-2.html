@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجر احترافي مع أدمن</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f4f6f9;
+}
+
+nav{
+background:#2563eb;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.login{
+max-width:350px;
+margin:100px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px #ddd;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+}
+
+button{
+padding:8px;
+border:none;
+cursor:pointer;
+margin:3px;
+border-radius:5px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+gap:15px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 0 10px #ddd;
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.info{
+padding:10px;
+text-align:center;
+}
+
+.price{color:red;font-weight:bold}
+
+.add{background:#2563eb;color:white;width:100%}
+.del{background:#ef4444;color:white;width:100%}
+.cartBtn{background:green;color:white;width:100%}
+
+/* admin panel */
+.adminPanel{
+display:none;
+background:white;
+padding:15px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 0 10px #ddd;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<h3>🛍️ متجر الملابس</h3>
+<button onclick="logout()">خروج</button>
+</nav>
+
+<!-- LOGIN -->
+<div id="loginBox" class="login">
+
+<h3>تسجيل الدخول</h3>
+
+<input id="user" placeholder="اسم المستخدم">
+<input id="pass" type="password" placeholder="كلمة المرور">
+
+<button onclick="login()">دخول</button>
+
+<hr>
+
+<h3>إنشاء حساب</h3>
+
+<input id="regUser" placeholder="اسم مستخدم">
+<input id="regPass" type="password" placeholder="كلمة المرور">
+
+<button onclick="register()">إنشاء حساب</button>
+
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+<div class="container">
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="adminPanel">
+
+<h3>🛠️ لوحة الأدمن</h3>
+
+<input id="pname" placeholder="اسم المنتج">
+<input id="pprice" placeholder="السعر">
+<input id="pimg" placeholder="رابط الصورة">
+
+<button class="add" onclick="addProduct()">إضافة منتج</button>
+
+</div>
+
+<h3>المنتجات</h3>
+
+<div class="grid" id="grid"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* USERS */
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+
+/* PRODUCTS */
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+/* CREATE ADMIN ON FIRST RUN */
+if(!users.find(u=>u.username==="awawdeh")){
+users.push({
+username:"awawdeh",
+password:"2001201077",
+role:"admin"
+});
+localStorage.setItem("users",JSON.stringify(users));
+}
+
+/* CHECK LOGIN */
+if(currentUser){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("app").style.display="block";
+if(currentUser.role==="admin"){
+document.getElementById("adminPanel").style.display="block";
+}
+render();
+}
+
+/* REGISTER USER */
+function register(){
+
+let u = regUser.value;
+let p = regPass.value;
+
+if(!u || !p){
+alert("عبّي البيانات");
+return;
+}
+
+if(users.find(x=>x.username===u)){
+alert("المستخدم موجود");
+return;
+}
+
+users.push({
+username:u,
+password:p,
+role:"user",
+cart:[]
+});
+
+localStorage.setItem("users",JSON.stringify(users));
+
+alert("تم إنشاء الحساب");
+}
+
+/* LOGIN */
+function login(){
+
+let u = user.value;
+let p = pass.value;
+
+let found = users.find(x=>x.username===u && x.password===p);
+
+if(!found){
+alert("خطأ");
+return;
+}
+
+currentUser = found;
+
+localStorage.setItem("currentUser",JSON.stringify(currentUser));
+
+loginBox.style.display="none";
+app.style.display="block";
+
+if(currentUser.role==="admin"){
+adminPanel.style.display="block";
+}
+
+render();
+}
+
+/* LOGOUT */
+function logout(){
+localStorage.removeItem("currentUser");
+location.reload();
+}
+
+/* ADD PRODUCT (ADMIN ONLY) */
+function addProduct(){
+
+if(currentUser.role!=="admin"){
+alert("ممنوع");
+return;
+}
+
+let name = pname.value;
+let price = pprice.value;
+let img = pimg.value;
+
+if(!name || !price || !img){
+alert("عبّي البيانات");
+return;
+}
+
+products.push({
+name,
+price,
+img
+});
+
+localStorage.setItem("products",JSON.stringify(products));
+
+render();
+}
+
+/* DELETE PRODUCT */
+function del(i){
+
+if(currentUser.role!=="admin"){
+alert("ممنوع");
+return;
+}
+
+products.splice(i,1);
+
+localStorage.setItem("products",JSON.stringify(products));
+
+render();
+}
+
+/* RENDER */
+function render(){
+
+grid.innerHTML="";
+
+products.forEach((p,i)=>{
+
+grid.innerHTML+=`
+<div class="card">
+
+<img src="${p.img}">
+
+<div class="info">
+
+<h4>${p.name}</h4>
+<div class="price">${p.price} دينار</div>
+
+${currentUser.role==="admin"
+? `<button class="del" onclick="del(${i})">حذف</button>`
+: ""}
+
+</div>
+
+</div>
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

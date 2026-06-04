@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Picture Element Example</title>
+
+</head>
+
+<body>
+
+    <h2>The Picture Element</h2>
+
+    <picture>
+
+        <source   media="(min-width: 900px)"
+                  srcset="https://picsum.photos/700/300">
+
+        <source  media="(min-width: 500px)"
+                 srcset="https://picsum.photos/500/300">
+
+        <img  src="https://picsum.photos/300/300"
+              alt="Random Image"
+              style="width:auto;">
+
+    </picture>
+
+    <p>
+        The picture element allows different images to appear
+        depending on screen size.
+    </p>
+
+    <p>
+        The browser chooses the first image that matches the device size.
+    </p>
+
+</body>
+</html>
